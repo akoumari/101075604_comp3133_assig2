@@ -1,0 +1,16 @@
+query bookingsByUser( $user: ID!){
+bookingsByUser(user: $user){
+id
+hotel{
+id
+hotel_name
+city
+}
+booking_date
+booking_start
+booking_end
+user{
+id
+}
+}
+}

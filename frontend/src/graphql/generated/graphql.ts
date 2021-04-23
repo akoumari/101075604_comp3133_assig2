@@ -162,7 +162,6 @@ export type MutationEditHotelArgs = {
 
 export type MutationAddBookingArgs = {
   hotel: Scalars['ID'];
-  booking_date: Scalars['DateISO'];
   booking_start: Scalars['DateISO'];
   booking_end: Scalars['DateISO'];
   user: Scalars['ID'];
@@ -244,6 +243,88 @@ export type User = {
   email?: Maybe<Scalars['String']>;
 };
 
+export type AddBookingMutationVariables = Exact<{
+  hotel: Scalars['ID'];
+  booking_start: Scalars['DateISO'];
+  booking_end: Scalars['DateISO'];
+  user: Scalars['ID'];
+}>;
+
+
+export type AddBookingMutation = (
+  { __typename?: 'Mutation' }
+  & { addBooking?: Maybe<(
+    { __typename?: 'Booking' }
+    & Pick<Booking, 'id'>
+  )> }
+);
+
+export type AddUserMutationVariables = Exact<{
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+}>;
+
+
+export type AddUserMutation = (
+  { __typename?: 'Mutation' }
+  & { addUser?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+  )> }
+);
+
+export type BookingsByUserQueryVariables = Exact<{
+  user: Scalars['ID'];
+}>;
+
+
+export type BookingsByUserQuery = (
+  { __typename?: 'Query' }
+  & { bookingsByUser?: Maybe<Array<Maybe<(
+    { __typename?: 'Booking' }
+    & Pick<Booking, 'id' | 'booking_date' | 'booking_start' | 'booking_end'>
+    & { hotel?: Maybe<(
+      { __typename?: 'Hotel' }
+      & Pick<Hotel, 'id' | 'hotel_name' | 'city'>
+    )>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    )> }
+  )>>> }
+);
+
+export type EditUserMutationVariables = Exact<{
+  id: Scalars['ID'];
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
+}>;
+
+
+export type EditUserMutation = (
+  { __typename?: 'Mutation' }
+  & { editUser?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+  )> }
+);
+
+export type HotelsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HotelsQuery = (
+  { __typename?: 'Query' }
+  & { hotels?: Maybe<Array<Maybe<(
+    { __typename?: 'Hotel' }
+    & Pick<Hotel, 'id' | 'hotel_name' | 'street' | 'city' | 'postal_code' | 'price'>
+  )>>> }
+);
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -290,6 +371,130 @@ export type UserQuery = (
   )> }
 );
 
+export const AddBookingDocument = gql`
+    mutation addBooking($hotel: ID!, $booking_start: DateISO!, $booking_end: DateISO!, $user: ID!) {
+  addBooking(
+    hotel: $hotel
+    booking_start: $booking_start
+    booking_end: $booking_end
+    user: $user
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AddBookingGQL extends Apollo.Mutation<AddBookingMutation, AddBookingMutationVariables> {
+    document = AddBookingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AddUserDocument = gql`
+    mutation addUser($firstname: String!, $lastname: String!, $email: String!, $password: String!, $username: String!) {
+  addUser(
+    firstname: $firstname
+    lastname: $lastname
+    email: $email
+    password: $password
+    username: $username
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AddUserGQL extends Apollo.Mutation<AddUserMutation, AddUserMutationVariables> {
+    document = AddUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BookingsByUserDocument = gql`
+    query bookingsByUser($user: ID!) {
+  bookingsByUser(user: $user) {
+    id
+    hotel {
+      id
+      hotel_name
+      city
+    }
+    booking_date
+    booking_start
+    booking_end
+    user {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BookingsByUserGQL extends Apollo.Query<BookingsByUserQuery, BookingsByUserQueryVariables> {
+    document = BookingsByUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const EditUserDocument = gql`
+    mutation editUser($id: ID!, $firstname: String, $lastname: String, $email: String, $password: String, $username: String) {
+  editUser(
+    id: $id
+    firstname: $firstname
+    lastname: $lastname
+    email: $email
+    password: $password
+    username: $username
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EditUserGQL extends Apollo.Mutation<EditUserMutation, EditUserMutationVariables> {
+    document = EditUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const HotelsDocument = gql`
+    query hotels {
+  hotels {
+    id
+    hotel_name
+    street
+    city
+    postal_code
+    price
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class HotelsGQL extends Apollo.Query<HotelsQuery, HotelsQueryVariables> {
+    document = HotelsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {

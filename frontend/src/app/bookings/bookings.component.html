@@ -1,0 +1,52 @@
+<div class="d-flex row">
+    <div class="my-2 col-5 rounded d-flex bg-clear-light mx-1 align-items-center py-2"
+        *ngFor="let booking of bookings | slice: (page-1) * pageSize : page * pageSize">
+        <div class="col-2">
+            <mat-icon style="font-size: 4em;" class="material-icons-outlined">
+                book
+            </mat-icon>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    Hotel: {{booking.hotel.hotel_name |  titlecase}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    City: {{booking.hotel.city |  titlecase}}
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col">
+
+                   Check-in: {{booking.booking_start | date}}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+
+                   Check-out: {{booking.booking_end | date}}
+                </div>
+
+            </div>
+            
+           
+            
+            
+        </div>
+        
+        
+        
+        
+        
+    </div>
+    <div class="d-flex col-10 my-3 py-3 justify-content-center">
+        <ngb-pagination [collectionSize]="collectionSize" [pageSize]='pageSize' [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+        
+      </div>
+</div>

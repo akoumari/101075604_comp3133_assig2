@@ -1,0 +1,20 @@
+mutation editUser(
+  $id: ID!
+  $firstname: String
+  $lastname: String
+  $email: String
+  $password: String
+  $username: String
+) {
+  editUser(
+    id: $id
+    firstname: $firstname
+    lastname: $lastname
+    email: $email
+    password: $password
+    username: $username
+  ) {
+    id
+
+  }
+}

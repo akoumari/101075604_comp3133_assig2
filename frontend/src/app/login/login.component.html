@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="mt-5 p-5 bg-clear-dark  rounded shadow ">
+    <form class="form-signin d-flex justify-content-center" (ngSubmit)="onSubmit()">
+       <div class="col">    
+
+               
+           <div class="col col-12 d-flex justify-content-center" >        
+               <h1 class="h3 mb-3  font-weight-normal">Please sign in</h1>
+           </div>  
+    
+       <div class="col col-6 offset-3">
+           
+           <label for="email" class="sr-only">Email address</label>
+           <input
+           type="email"
+           name="email"
+           class="form-control"
+           placeholder="Email address"
+           required
+           autofocus
+           [(ngModel)]="email"
+           />
+        </div>
+        <div class="col col-6 offset-3 my-2">
+            <label for="password" class="sr-only">Password</label>
+            <input
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            required
+            [(ngModel)]="password"
+            />
+        </div>
+        <div class="col col-6 offset-3 my-2">
+         <button class="btn btn-lg btn-primary btn-block" type="submit">
+           Sign in
+         </button>
+        </div>
+       
+
+       </div>
+    </form>
+  </div>

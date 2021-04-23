@@ -1,0 +1,12 @@
+query hotels {
+ hotels {
+    id
+   hotel_name
+street
+city
+postal_code
+price
+
+
+  }
+}

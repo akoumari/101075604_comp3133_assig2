@@ -1,1 +1,78 @@
-<p>home works!</p>
+<div class="col col-10">
+
+    <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search Hotels" (ngModelChange)="handleSearch()" >
+</div>
+<div class="d-flex row">
+    <div class="my-2 col-5 rounded d-flex bg-clear-light mx-1 align-items-center py-2"
+        *ngFor="let hotel of hotels | slice: (page-1) * pageSize : page * pageSize">
+        <div class="col-2">
+            <mat-icon style="font-size: 4em;" class="material-icons-outlined">
+                domain
+            </mat-icon>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    {{hotel.hotel_name |  titlecase}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+                    {{hotel.street |  titlecase}}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{hotel.city |  titlecase}}, {{hotel.postal_code | uppercase}}
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+
+                    Price: {{hotel.price | currency }}/night
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col">
+
+                    <button (click)="open(content, hotel )" mat-raised-button color="tint">book</button>
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        
+        
+        
+        <ng-template   #content let-modal>
+         <div class='p-5 m-5'>
+            <h4>Book a room at {{hotel.hotel_name}}</h4>
+            <form (ngSubmit)="onSubmit()">
+
+                Start date: <input type="date" name="booking_start" [(ngModel)]="booking_start" class="form-control" placeholder="Search Hotels" (ngModelChange)="handleSearch()" >
+                End date: <input type="date" name="booking_end"  [(ngModel)]="booking_end" class="form-control" placeholder="Search Hotels" (ngModelChange)="handleSearch()" >
+                <div class="my-3 d-flex justify-content-center">
+                    
+                     <button mat-raised-button color="primary" class="  " type="submit">
+                        Create Account
+                      </button>
+                 </div>
+            </form>
+         </div>
+            
+          </ng-template>
+        
+    </div>
+    <div class="d-flex col-10 my-3 py-3 justify-content-center">
+        <ngb-pagination [collectionSize]="collectionSize" [pageSize]='pageSize' [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+        
+      </div>
+</div>

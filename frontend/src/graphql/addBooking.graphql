@@ -1,0 +1,16 @@
+mutation addBooking(
+ $hotel: ID!
+      $booking_start: DateISO!
+     $booking_end: DateISO!
+      $user: ID!
+   
+) {
+  addBooking(
+    hotel: $hotel
+    booking_start:$booking_start
+    booking_end:$booking_end
+    user:$user
+  ) {
+    id
+  }
+}

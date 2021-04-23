@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import '@angular/material/prebuilt-themes/purple-green.css';
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import '~ngx-toastr/toastr';
+
+html, body { height: 100%;
+background: linear-gradient(to bottom, #5a125a 0%, #000000 100%);
+color: white;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.bg-clear-dark{
+    background-color: rgba(0, 0, 0, 0.829);
+}
+.bg-clear-light{
+    background-color: rgba(19, 6, 18, 0.719);
+    box-shadow:  0px 0px 3px 2px rgba(166, 0, 243, 0.22), 2px 3px 33px 3px rgba( 166, 0, 243, 0.12) !important ;
+}
+.modal-content{
+    background-color: rgba(87, 57, 84, 0.692);
+    border:1px solid #5a125a;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
